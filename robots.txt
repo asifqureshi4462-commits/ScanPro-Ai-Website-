@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /backend/
+Disallow: /database/
+Disallow: /frontend/dashboard.php
+Disallow: /frontend/login.php
+Disallow: /frontend/forgot-password.php
+
+Sitemap: https://scanproai.great-site.net/sitemap.xml

@@ -1,0 +1,256 @@
+/* ==========================================================================
+   ScanPro AI - Global Base Styles & Layout System
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    background-image:
+        radial-gradient(circle at 12% 10%, rgba(34, 211, 238, 0.08) 0%, transparent 36%),
+        radial-gradient(circle at 88% 25%, rgba(168, 85, 247, 0.07) 0%, transparent 38%);
+}
+
+main {
+    flex: 1;
+    width: 100%;
+    min-width: 0;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    max-width: 100%;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Sections */
+.section {
+    padding-top: var(--section-py);
+    padding-bottom: var(--section-py);
+    position: relative;
+}
+
+.section--deep {
+    background-color: var(--bg-darker);
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.section--cyber {
+    background: var(--gradient-hero);
+}
+
+.section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 48px;
+}
+
+.section-header--left {
+    text-align: left;
+    margin-left: 0;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--accent-cyan);
+    background: rgba(34, 211, 238, 0.10);
+    border: 1px solid var(--glass-border-cyan);
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 14px;
+    max-width: 100%;
+}
+
+.eyebrow--purple {
+    color: var(--accent-purple);
+    background: rgba(168, 85, 247, 0.12);
+    border-color: rgba(168, 85, 247, 0.30);
+}
+
+h1, h2, h3, h4 {
+    color: var(--text-white);
+    line-height: 1.2;
+    font-weight: 700;
+    overflow-wrap: break-word;
+}
+
+h1 {
+    font-size: clamp(1.9rem, 4.5vw, 3.35rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: clamp(1.5rem, 3vw, 2.35rem);
+    letter-spacing: -0.015em;
+}
+
+h3 {
+    font-size: 1.18rem;
+}
+
+.section-subtitle {
+    margin-top: 14px;
+    color: var(--text-secondary);
+    font-size: 1.02rem;
+}
+
+.text-gradient {
+    background: var(--gradient-cyan);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-gradient-ai {
+    background: var(--gradient-ai);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-muted {
+    color: var(--text-secondary);
+}
+
+.text-mono {
+    font-family: var(--font-mono);
+}
+
+/* Grid Systems */
+.grid {
+    display: grid;
+    gap: 24px;
+}
+
+.grid > *,
+.hero-grid > *,
+.split-grid > *,
+.dashboard-grid > * {
+    min-width: 0;
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* Page Hero Banner (Inner Pages) */
+.page-hero {
+    padding: 64px 0 48px;
+    background: var(--gradient-hero);
+    border-bottom: 1px solid var(--glass-border);
+    text-align: center;
+}
+
+.page-hero p {
+    max-width: 680px;
+    margin: 14px auto 0;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+}
+
+/* Cyber Subtle Grid Overlay */
+.cyber-grid-bg {
+    background-image:
+        linear-gradient(rgba(34, 211, 238, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* Utility Helpers */
+.mt-1 { margin-top: 8px; }
+.mt-2 { margin-top: 16px; }
+.mt-3 { margin-top: 24px; }
+.mt-4 { margin-top: 32px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 24px; }
+.text-center { text-align: center; }
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus Accessibility */
+:focus-visible {
+    outline: 2px solid var(--accent-cyan);
+    outline-offset: 2px;
+}

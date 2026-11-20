@@ -1,0 +1,7 @@
+# ScanPro AI - Backend Directory Protection
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(config|helpers|auth)(/.*)?$ - [F,L]
+</IfModule>

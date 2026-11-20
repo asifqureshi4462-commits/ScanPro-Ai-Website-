@@ -1,0 +1,9 @@
+/* ScanPro AI - ad slot. Normal page flow only: never fixed, never overlapping content. */
+.ad-section { padding: 22px 0; position: relative; z-index: 0; }
+/* Collapsed until an ad has really loaded (width is kept so the ad script can measure it). */
+.ad-section[data-ad-pending] { height: 0; overflow: hidden; padding: 0; margin: 0; opacity: 0; pointer-events: none; }
+.ad-slot { max-width: 100%; margin: 0 auto; text-align: center; }
+.ad-label { display: block; margin-bottom: 6px; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted, #7c8aa5); }
+.ad-box { width: 100%; max-width: 100%; overflow: hidden; display: flex; justify-content: center; border-radius: 12px; }
+.ad-box > div, .ad-box iframe, .ad-box img { max-width: 100% !important; }
+@media print { .ad-section { display: none !important; } }

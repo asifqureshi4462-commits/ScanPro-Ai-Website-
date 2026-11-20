@@ -1,0 +1,142 @@
+/* ==========================================================================
+   ScanPro AI - Site-wide 3D design layer
+   Load AFTER live-3d.css. Pure CSS + light JS (site-3d.js). No WebGL needed.
+   ========================================================================== */
+
+:root {
+    --d3-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --d3-edge: #050b16;
+    --d3-lift: 0 26px 46px -16px rgba(0, 0, 0, 0.75);
+}
+
+/* ---------- Depth context ---------- */
+.hero, .page-hero, .section, .tool-topbar, .tool-workspace { perspective: 1400px; }
+.hero > .container, .page-hero > .container, .section > .container,
+.tool-topbar > .container, .tool-workspace > .container { position: relative; z-index: 1; }
+
+/* ---------- Header: glass slab ---------- */
+.site-header {
+    box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 -1px 0 rgba(34, 211, 238, 0.22) inset;
+}
+.site-header .brand-logo, .site-header .brand-mark {
+    filter: drop-shadow(0 4px 0 rgba(8, 145, 178, 0.45)) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.55));
+    transition: transform 0.3s var(--d3-ease);
+}
+.site-header .brand-logo:hover, .site-header .brand-mark:hover { transform: translateY(-2px) rotateY(18deg) scale(1.06); }
+.nav-link { transition: transform 0.25s var(--d3-ease), color 0.2s ease, text-shadow 0.2s ease; }
+.nav-link:hover { transform: translateY(-2px); text-shadow: 0 0 14px rgba(34, 211, 238, 0.6), 0 3px 0 rgba(8, 145, 178, 0.35); }
+
+/* ---------- Headings: extruded type ---------- */
+.hero h1, .page-hero h1, .tool-topbar h1 { text-shadow: 0 1px 0 #0a1424, 0 2px 0 #0a1424, 0 3px 0 #08101c, 0 12px 26px rgba(0, 0, 0, 0.55); }
+.text-gradient, .text-gradient-ai { text-shadow: none; filter: drop-shadow(0 3px 0 rgba(8, 145, 178, 0.5)) drop-shadow(0 10px 16px rgba(0, 0, 0, 0.45)); }
+.section-header h2 { text-shadow: 0 2px 0 #0a1424, 0 10px 20px rgba(0, 0, 0, 0.45); }
+
+/* ---------- Surfaces: thick glass plates ---------- */
+.card, .pricing-card, .pdf-hub-card, .workspace-panel, .auth-card, .dashboard-sidebar, .dashboard-panel, .hero-stat, .faq-item, .result-panel {
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.10) inset, 0 6px 0 -2px var(--d3-edge), var(--d3-lift);
+}
+.card:hover, .pricing-card:hover, .pdf-hub-card:hover {
+    box-shadow: 0 1px 0 rgba(34, 211, 238, 0.30) inset, 0 9px 0 -2px var(--d3-edge), 0 34px 56px -18px rgba(0, 0, 0, 0.85), 0 0 30px rgba(34, 211, 238, 0.20);
+}
+.card::after, .pricing-card::after, .pdf-hub-card::after {
+    content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity 0.3s ease;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, 0.11), transparent 46%);
+}
+.card:hover::after, .pricing-card:hover::after, .pdf-hub-card:hover::after { opacity: 1; }
+
+.card--highlight, .pricing-card.featured, .pricing-card--featured { scale: 1.025; translate: 0 -6px; }
+.card-icon { box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35), 0 14px 22px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.22) inset; }
+
+/* ---------- Buttons: extruded keys ---------- */
+.btn { transition: transform 0.18s var(--d3-ease), box-shadow 0.18s var(--d3-ease), background 0.2s ease, border-color 0.2s ease; }
+.btn-outline { box-shadow: 0 4px 0 rgba(8, 145, 178, 0.5), 0 10px 18px rgba(0, 0, 0, 0.3); }
+.btn-outline:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 0 rgba(8, 145, 178, 0.55), 0 14px 24px rgba(0, 0, 0, 0.35); }
+.btn-outline:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 rgba(8, 145, 178, 0.5); }
+.btn-danger { box-shadow: 0 4px 0 #7f1d1d, 0 10px 18px rgba(0, 0, 0, 0.35); }
+.btn-danger:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 #7f1d1d; }
+.btn-sm.btn-primary { box-shadow: 0 3px 0 #0891B2, 0 8px 16px rgba(0, 212, 232, 0.25); }
+.btn:disabled { box-shadow: none; }
+
+/* ---------- Form controls: carved inset ---------- */
+.form-control, .sp-input, .ws-select, .ws-textarea, .header-search-input {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.55) inset, 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s var(--d3-ease);
+}
+.form-control:focus, .sp-input:focus, .ws-select:focus, .ws-textarea:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5) inset, 0 0 0 3px rgba(34, 211, 238, 0.2), 0 10px 20px -8px rgba(34, 211, 238, 0.35);
+}
+
+/* ---------- Dropzone & thumbs ---------- */
+.dropzone, .ws-drop { box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.08) inset, 0 18px 40px -20px rgba(0, 0, 0, 0.8), 0 10px 30px rgba(0, 0, 0, 0.35) inset; }
+.dropzone-icon, .ws-drop > i { animation: d3Bob 3.6s ease-in-out infinite; filter: drop-shadow(0 8px 10px rgba(34, 211, 238, 0.35)); }
+@keyframes d3Bob { 0%, 100% { transform: translateY(0) rotateY(0); } 50% { transform: translateY(-8px) rotateY(14deg); } }
+.thumb-card, .ws-thumb, .file-queue-item { box-shadow: 0 5px 0 -1px var(--d3-edge), 0 14px 22px -10px rgba(0, 0, 0, 0.7); transition: transform 0.25s var(--d3-ease), box-shadow 0.25s ease; }
+.thumb-card:hover, .ws-thumb:hover { transform: translateY(-4px) rotateX(4deg); }
+.ws-canvas-wrap canvas { box-shadow: 0 30px 50px -14px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(34, 211, 238, 0.2); }
+
+/* ---------- FAQ / footer ---------- */
+.faq-item { transition: transform 0.25s var(--d3-ease); }
+.faq-item.open { transform: translateY(-2px) translateZ(0); }
+.site-footer { box-shadow: 0 -24px 40px -22px rgba(0, 0, 0, 0.85), 0 1px 0 rgba(34, 211, 238, 0.2) inset; }
+
+/* ---------- Modals: swing in ---------- */
+.sp-modal-overlay, .ws-pop-overlay { perspective: 1200px; }
+.sp-modal, .ws-pop { transform: translateY(22px) rotateX(14deg) scale(0.96); transform-origin: 50% 100%; }
+.sp-modal-overlay.open .sp-modal, .ws-pop-overlay.open .ws-pop { transform: none; }
+
+/* ---------- Scroll reveal (individual transform props, so card tilt keeps working) ---------- */
+html.sp3d-ready [data-reveal] {
+    opacity: 0; translate: 0 44px; rotate: x 16deg; scale: 0.95;
+    transition: opacity 0.7s var(--d3-ease), translate 0.8s var(--d3-ease), rotate 0.8s var(--d3-ease), scale 0.8s var(--d3-ease),
+                transform 0.25s var(--d3-ease), box-shadow 0.3s ease, border-color 0.3s ease;
+    transition-delay: var(--rd, 0ms), var(--rd, 0ms), var(--rd, 0ms), var(--rd, 0ms), 0s, 0s, 0s;
+}
+html.sp3d-ready [data-reveal].in-view { opacity: 1; translate: 0 0; rotate: x 0deg; scale: 1; }
+html.sp3d-ready .card--highlight[data-reveal].in-view { scale: 1.025; translate: 0 -6px; }
+
+/* ---------- Floating 3D shapes (injected by site-3d.js) ---------- */
+.d3-shapes { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.d3-shape { position: absolute; translate: calc(var(--px, 0) * var(--k, 12) * 1px) calc((var(--py, 0) * var(--k, 12) + var(--sy, 0)) * 1px); transition: translate 0.25s ease-out; opacity: 0.85; }
+.d3-cube-wrap { perspective: 700px; }
+.d3-cube { position: relative; width: var(--s, 54px); height: var(--s, 54px); transform-style: preserve-3d; animation: d3Spin 20s linear infinite; }
+.d3-cube i { position: absolute; inset: 0; border: 1px solid rgba(34, 211, 238, 0.55); background: linear-gradient(135deg, rgba(34, 211, 238, 0.16), rgba(168, 85, 247, 0.12)); box-shadow: 0 0 20px rgba(34, 211, 238, 0.2) inset; }
+.d3-cube i:nth-child(1) { transform: translateZ(calc(var(--s, 54px) / 2)); }
+.d3-cube i:nth-child(2) { transform: rotateY(180deg) translateZ(calc(var(--s, 54px) / 2)); }
+.d3-cube i:nth-child(3) { transform: rotateY(90deg) translateZ(calc(var(--s, 54px) / 2)); }
+.d3-cube i:nth-child(4) { transform: rotateY(-90deg) translateZ(calc(var(--s, 54px) / 2)); }
+.d3-cube i:nth-child(5) { transform: rotateX(90deg) translateZ(calc(var(--s, 54px) / 2)); }
+.d3-cube i:nth-child(6) { transform: rotateX(-90deg) translateZ(calc(var(--s, 54px) / 2)); }
+@keyframes d3Spin { from { transform: rotateX(-24deg) rotateY(0deg); } to { transform: rotateX(-24deg) rotateY(360deg); } }
+.d3-ring-wrap { perspective: 600px; }
+.d3-ring { width: var(--s, 120px); height: var(--s, 120px); border-radius: 50%; border: 3px solid rgba(34, 211, 238, 0.4); box-shadow: 0 0 26px rgba(34, 211, 238, 0.28), 0 0 22px rgba(34, 211, 238, 0.2) inset; animation: d3Ring 16s linear infinite; }
+.d3-ring.purple { border-color: rgba(168, 85, 247, 0.45); box-shadow: 0 0 26px rgba(168, 85, 247, 0.3), 0 0 22px rgba(168, 85, 247, 0.2) inset; animation-direction: reverse; }
+@keyframes d3Ring { from { transform: rotateX(68deg) rotateZ(0deg); } to { transform: rotateX(68deg) rotateZ(360deg); } }
+.d3-gem { width: var(--s, 44px); height: var(--s, 44px); background: linear-gradient(135deg, rgba(168, 85, 247, 0.5), rgba(34, 211, 238, 0.35)); border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 8px; box-shadow: 0 14px 24px rgba(0, 0, 0, 0.5), 0 0 22px rgba(168, 85, 247, 0.3); animation: d3Gem 9s ease-in-out infinite; }
+@keyframes d3Gem { 0%, 100% { transform: rotateX(30deg) rotateY(-20deg) rotateZ(45deg) translateY(0); } 50% { transform: rotateX(60deg) rotateY(25deg) rotateZ(225deg) translateY(-14px); } }
+
+/* Stacked sheets behind the hero document scenes */
+.d3-sheet { position: absolute; z-index: 1; width: min(262px, 78%); height: 224px; border-radius: 18px; border: 1px solid rgba(34, 211, 238, 0.35); background: linear-gradient(160deg, rgba(15, 35, 58, 0.7), rgba(6, 17, 34, 0.7)); box-shadow: 0 22px 40px rgba(0, 0, 0, 0.5); pointer-events: none; }
+.d3-sheet.s1 { transform: translateZ(18px) translate(26px, 12px) rotateX(10deg) rotateY(-14deg); opacity: 0.75; }
+.d3-sheet.s2 { transform: translateZ(-8px) translate(52px, 24px) rotateX(10deg) rotateY(-14deg); opacity: 0.5; }
+.d3-orbit { position: absolute; z-index: 0; width: min(380px, 96%); aspect-ratio: 1; border-radius: 50%; border: 2px solid rgba(34, 211, 238, 0.25); box-shadow: 0 0 36px rgba(34, 211, 238, 0.15); transform: rotateX(72deg); animation: d3Orbit 22s linear infinite; pointer-events: none; }
+@keyframes d3Orbit { from { transform: rotateX(72deg) rotateZ(0); } to { transform: rotateX(72deg) rotateZ(360deg); } }
+.scene3d-stage[data-d3-drag] { touch-action: pan-y; cursor: grab; }
+
+@media (max-width: 900px) {
+    .d3-shape.hero-cube { left: auto !important; right: 6%; top: 1% !important; }
+}
+@media (max-width: 640px) {
+    .d3-shape.hide-sm { display: none; }
+    .d3-sheet { height: 200px; }
+    .d3-sheet.s1 { translate: -6px 0; }
+    .d3-sheet.s2 { translate: -14px 0; }
+    html.sp3d-ready [data-reveal] { translate: 0 30px; rotate: x 10deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html.sp3d-ready [data-reveal] { opacity: 1; translate: none; rotate: none; scale: none; transition: none; }
+    .d3-cube, .d3-ring, .d3-gem, .d3-orbit, .dropzone-icon, .ws-drop > i { animation: none !important; }
+}
+
+/* Phone tilt (gyroscope) on open 3D scenes */
+.scene3d-stage { rotate: y calc(var(--gx, 0) * 9deg); }

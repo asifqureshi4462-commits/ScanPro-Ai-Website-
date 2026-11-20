@@ -1,0 +1,8 @@
+/* ScanPro AI - extra styles for Sign / Redact tools */
+.st-sign-pad { width: 100%; height: auto; background: #fff; border-radius: 12px; border: 2px dashed #94a3b8; touch-action: none; cursor: crosshair; display: block; }
+.rd-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--text-secondary, #9fb0c9); font-size: 0.86rem; }
+.rd-bar #rdLabel { flex: 1; min-width: 120px; text-align: center; }
+.rd-wrap { position: relative; display: block; width: fit-content; max-width: 100%; margin: 0 auto; touch-action: none; cursor: crosshair; line-height: 0; }
+.rd-wrap canvas { max-width: 100%; height: auto; border-radius: 4px; box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.7); }
+#rdBoxes { position: absolute; inset: 0; pointer-events: none; }
+.rd-box { position: absolute; background: rgba(0, 0, 0, 0.88); border: 1px solid #22d3ee; }

@@ -1,0 +1,35 @@
+/* ScanPro AI - Google sign-in block */
+.google-auth { margin-top: 18px; }
+.google-auth[hidden], .google-auth [hidden] { display: none !important; }
+.google-auth-divider { display: flex; align-items: center; gap: 12px; color: var(--text-muted, #7c8aa5); font-size: 0.82rem; margin-bottom: 16px; }
+.google-auth-divider::before, .google-auth-divider::after { content: ""; flex: 1; height: 1px; background: var(--glass-border, rgba(255, 255, 255, 0.12)); }
+
+.btn-google {
+    background: #ffffff; color: #1f2937; border: 1px solid #dadce0; font-weight: 600;
+    display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+    box-shadow: 0 4px 0 #b9c0cc, 0 10px 18px rgba(0, 0, 0, 0.3);
+}
+.btn-google:hover:not(:disabled) { background: #f8fafc; transform: translateY(-2px); box-shadow: 0 6px 0 #b9c0cc, 0 14px 24px rgba(0, 0, 0, 0.35); }
+.btn-google:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 #b9c0cc; }
+.btn-google:disabled { opacity: 0.85; cursor: progress; }
+.btn-google.is-loading .google-logo { display: none; }
+.btn-google.is-loading::before {
+    content: ""; width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid #cbd5e1; border-top-color: #4285F4; animation: googleSpin 0.8s linear infinite;
+}
+@keyframes googleSpin { to { transform: rotate(360deg); } }
+
+.google-auth-error {
+    margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; font-size: 0.86rem; line-height: 1.45;
+    color: #fecaca; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.4);
+}
+.google-profile {
+    display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 14px;
+    background: var(--bg-tool, rgba(255, 255, 255, 0.04)); border: 1px solid var(--glass-border-cyan, rgba(34, 211, 238, 0.3));
+}
+.google-profile-img { border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid rgba(34, 211, 238, 0.5); }
+.google-profile-text { min-width: 0; flex: 1; display: flex; flex-direction: column; }
+.google-profile-text strong { color: var(--text-white, #fff); font-size: 0.95rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.google-profile-text span { color: var(--text-secondary, #9fb0c9); font-size: 0.82rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 420px) { .google-profile { flex-wrap: wrap; } .google-profile .btn { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .btn-google.is-loading::before { animation-duration: 2s; } }

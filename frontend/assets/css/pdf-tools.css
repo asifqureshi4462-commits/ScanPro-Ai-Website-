@@ -1,0 +1,570 @@
+/* ==========================================================================
+   ScanPro AI - PDF Tools Hub & Dedicated Workspace Styles
+   Uses variables from variables.css (Dark Navy, Cyan, Electric Blue)
+   ========================================================================== */
+
+/* Tool Hub Cards */
+.pdf-hub-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.pdf-hub-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--bg-tool);
+    border: 1px solid rgba(34, 211, 238, 0.22);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.pdf-hub-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-cyan);
+    box-shadow: var(--shadow-md), var(--glow-cyan);
+}
+
+.pdf-hub-card p {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    flex: 1;
+    margin-bottom: 18px;
+}
+
+/* Tool Workspace Top Header */
+.tool-topbar {
+    padding: 28px 0 24px;
+    background: var(--gradient-hero);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.tool-breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    margin-bottom: 14px;
+}
+
+.tool-breadcrumb:hover {
+    color: var(--accent-teal-light);
+}
+
+.tool-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.tool-title-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.tool-title-group h1 {
+    font-size: clamp(1.5rem, 3vw, 2.15rem);
+}
+
+.tool-title-group p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+.privacy-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #A7F3D0;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Workspace Two-Column Layout */
+.tool-workspace {
+    padding: 32px 0 64px;
+}
+
+.tool-grid {
+    display: grid;
+    grid-template-columns: 1.35fr 0.85fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.tool-grid > * {
+    min-width: 0;
+}
+
+.workspace-panel {
+    background: var(--bg-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+}
+
+.workspace-panel + .workspace-panel {
+    margin-top: 20px;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.panel-header h2,
+.panel-header h3 {
+    font-size: 1.08rem;
+}
+
+/* Upload Dropzone */
+.dropzone {
+    border: 2px dashed var(--glass-border-cyan);
+    border-radius: var(--radius-lg);
+    background: rgba(6, 27, 50, 0.55);
+    padding: 32px 20px;
+    text-align: center;
+    transition: border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+    cursor: pointer;
+}
+
+.dropzone:hover,
+.dropzone.is-dragover {
+    border-color: var(--accent-cyan);
+    background: rgba(34, 211, 238, 0.08);
+    box-shadow: var(--glow-cyan);
+}
+
+.dropzone-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 14px;
+    border-radius: 16px;
+    background: rgba(34, 211, 238, 0.14);
+    color: var(--accent-cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.dropzone h3 {
+    font-size: 1.06rem;
+    margin-bottom: 6px;
+}
+
+.dropzone p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.dropzone-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* File Info & Queue List */
+.file-meta-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    background: var(--bg-tool-alt);
+    border: 1px solid var(--glass-border);
+    margin-top: 14px;
+}
+
+.file-meta-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    flex: 1;
+}
+
+.file-meta-name {
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--text-white);
+    word-break: break-word;
+}
+
+.file-meta-sub {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.file-queue-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.file-queue-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    background: var(--bg-tool-alt);
+    border: 1px solid var(--glass-border);
+    transition: border-color var(--transition-fast);
+}
+
+.file-queue-item:hover {
+    border-color: var(--glass-border-cyan);
+}
+
+.file-queue-item.is-dragging {
+    opacity: 0.55;
+    border-color: var(--accent-cyan);
+}
+
+.file-queue-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    flex: 1;
+}
+
+.queue-index {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: rgba(34, 211, 238, 0.14);
+    color: var(--accent-cyan);
+    font-weight: 700;
+    font-size: 0.82rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.file-queue-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.icon-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--glass-border);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.icon-btn:hover:not(:disabled) {
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+}
+
+.icon-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.icon-btn--danger:hover:not(:disabled) {
+    border-color: var(--color-error);
+    color: #FCA5A5;
+}
+
+/* Page Thumbnail Grid */
+.thumb-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.thumb-card {
+    background: var(--bg-tool-alt);
+    border: 2px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    position: relative;
+}
+
+.thumb-card.is-selectable {
+    cursor: pointer;
+}
+
+.thumb-card.is-selected {
+    border-color: var(--accent-cyan);
+    background: rgba(34, 211, 238, 0.08);
+    box-shadow: 0 0 16px rgba(34, 211, 238, 0.18);
+}
+
+.thumb-card.is-dragging {
+    opacity: 0.5;
+    border-style: dashed;
+    border-color: var(--accent-cyan);
+}
+
+.thumb-card.is-drag-over {
+    border-color: var(--accent-teal);
+    transform: scale(1.02);
+}
+
+.thumb-canvas-wrap {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: #FFFFFF;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.thumb-canvas-wrap canvas,
+.thumb-canvas-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform var(--transition-fast);
+}
+
+.thumb-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+.thumb-badge {
+    font-weight: 700;
+    color: var(--text-white);
+}
+
+/* Position 3x3 Selector Grid */
+.position-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.position-btn {
+    padding: 10px 6px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--glass-border);
+    background: var(--bg-tool-alt);
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+}
+
+.position-btn.active {
+    background: rgba(34, 211, 238, 0.16);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+}
+
+/* Progress Panel */
+.progress-panel {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    background: var(--bg-tool-alt);
+    border: 1px solid var(--glass-border-cyan);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.84rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.progress-track {
+    width: 100%;
+    height: 8px;
+    border-radius: var(--radius-pill);
+    background: var(--bg-surface);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--gradient-cyan);
+    transition: width 0.2s ease;
+}
+
+/* Result & Download Panel */
+.result-panel {
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: var(--radius-lg);
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.result-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 12px 0 16px;
+}
+
+.result-stat-box {
+    background: var(--bg-tool-alt);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+}
+
+.result-stat-box span {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.result-stat-box strong {
+    font-size: 0.98rem;
+    color: var(--text-white);
+}
+
+.output-item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.output-item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-tool-alt);
+    border: 1px solid var(--glass-border);
+    font-size: 0.85rem;
+}
+
+/* Live Preview Box */
+.preview-stage {
+    margin-top: 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+    background: #09111F;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 260px;
+}
+
+.preview-stage canvas {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: var(--shadow-md);
+}
+
+.empty-state-box {
+    text-align: center;
+    padding: 36px 16px;
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+}
+
+.empty-state-box i {
+    font-size: 2rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+/* Range Slider */
+input[type="range"].range-control {
+    width: 100%;
+    accent-color: var(--accent-cyan);
+    cursor: pointer;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .pdf-hub-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .tool-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .pdf-hub-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .workspace-panel {
+        padding: 16px;
+    }
+
+    .thumb-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .result-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .file-queue-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .file-queue-actions {
+        justify-content: flex-end;
+    }
+}

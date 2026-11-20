@@ -1,0 +1,73 @@
+/* ScanPro AI - Web Workspace */
+.ws-title-row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px; }
+.ws-title-row h1 { margin: 6px 0; }
+.ws-drop {
+    display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; padding: 56px 18px;
+    border: 2px dashed var(--glass-border-cyan); border-radius: var(--radius-xl); background: var(--bg-tool);
+    color: var(--text-secondary); cursor: pointer; transition: all var(--transition-normal);
+}
+.ws-drop i { font-size: 2.4rem; color: var(--accent-cyan); }
+.ws-drop strong { color: var(--text-white); font-size: 1.1rem; }
+.ws-drop:hover, .ws-drop.over { border-color: var(--accent-cyan); background: rgba(34, 211, 238, 0.06); box-shadow: var(--glow-cyan); }
+.ws-drop[hidden], .ws-app[hidden] { display: none; }
+
+.ws-toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.ws-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; align-items: start; }
+.ws-stage { background: var(--bg-tool); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 14px; min-width: 0; }
+.ws-canvas-wrap { position: relative; display: flex; justify-content: center; background: #0a1220; border-radius: var(--radius-md); padding: 10px; }
+.ws-canvas-wrap canvas { max-width: 100%; max-height: 62vh; height: auto; border-radius: 4px; box-shadow: var(--shadow-md); }
+.ws-crop-box { position: absolute; border: 2px solid var(--accent-cyan); background: rgba(34, 211, 238, 0.14); box-shadow: 0 0 0 9999px rgba(4, 7, 13, 0.55); pointer-events: none; }
+.ws-crop-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 10px; font-size: 0.85rem; color: var(--text-secondary); }
+.ws-pages { display: flex; gap: 10px; overflow-x: auto; padding: 12px 2px 2px; }
+.ws-thumb { flex-shrink: 0; width: 76px; border: 2px solid var(--glass-border); border-radius: 8px; background: #0a1220; padding: 3px; cursor: pointer; position: relative; }
+.ws-thumb.active { border-color: var(--accent-cyan); box-shadow: var(--glow-cyan); }
+.ws-thumb canvas { width: 100%; height: 88px; object-fit: contain; display: block; }
+.ws-thumb span { position: absolute; top: 2px; left: 4px; font-size: 0.65rem; background: var(--bg-primary); color: var(--text-white); border-radius: 6px; padding: 0 5px; }
+
+.ws-panel { background: var(--bg-tool); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 16px; }
+.ws-panel h3 { font-size: 0.95rem; color: var(--text-white); margin: 14px 0 8px; }
+.ws-panel h3:first-child { margin-top: 0; }
+.ws-slider { display: block; font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 10px; }
+.ws-slider output { float: right; color: var(--accent-cyan); }
+.ws-slider input { width: 100%; accent-color: var(--accent-cyan); margin-top: 6px; }
+.ws-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ws-filters button {
+    padding: 9px 6px; border-radius: var(--radius-sm); border: 1px solid var(--glass-border); background: var(--bg-surface);
+    color: var(--text-primary); font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all var(--transition-fast);
+}
+.ws-filters button.active, .ws-filters button:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+.ws-export label { display: block; font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 10px; }
+.ws-select, .ws-textarea {
+    width: 100%; margin-top: 5px; padding: 10px 12px; border-radius: var(--radius-sm); border: 1px solid var(--glass-border);
+    background: var(--bg-input); color: var(--text-white); font: inherit; font-size: 0.88rem;
+}
+.ws-ocr-head .ws-select { width: auto; margin: 0; }
+.ws-ocr { margin-top: 16px; background: var(--bg-tool); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 16px; }
+.ws-ocr-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.ws-ocr-head h3 { color: var(--text-white); font-size: 1rem; }
+.ws-ocr .ws-textarea { margin: 10px 0; resize: vertical; }
+.ws-status { font-size: 0.82rem; color: var(--accent-cyan); min-height: 1.2em; margin-top: 6px; }
+.ws-status.err { color: var(--color-error); }
+
+/* Download popup */
+.ws-pop-overlay { position: fixed; inset: 0; z-index: 2100; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(4, 7, 13, 0.8); backdrop-filter: blur(6px); opacity: 0; visibility: hidden; transition: opacity 0.25s ease, visibility 0s linear 0.25s; }
+.ws-pop-overlay.open { opacity: 1; visibility: visible; transition: opacity 0.25s ease; }
+.ws-pop { position: relative; width: 100%; max-width: 440px; background: var(--bg-primary); border: 1px solid var(--glass-border-cyan); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg), var(--glow-cyan); padding: 26px 22px 20px; text-align: center; transform: translateY(16px) scale(0.97); transition: transform 0.3s ease; }
+.ws-pop-overlay.open .ws-pop { transform: none; }
+.ws-pop-x { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--glass-border); background: var(--bg-surface); color: #fff; cursor: pointer; }
+.ws-pop-ok { width: 58px; height: 58px; margin: 0 auto 10px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--color-success); background: rgba(16, 185, 129, 0.14); border: 2px solid var(--color-success); }
+.ws-pop h3 { color: var(--text-white); font-size: 1.25rem; }
+.ws-pop p.sub { color: var(--text-secondary); font-size: 0.88rem; margin: 6px 0 16px; }
+.ws-pop-promo { margin-top: 16px; padding: 14px; border-radius: var(--radius-md); background: var(--bg-tool); border: 1px dashed var(--glass-border-cyan); text-align: left; }
+.ws-pop-promo strong { color: var(--text-white); font-size: 0.92rem; }
+.ws-pop-promo p { color: var(--text-secondary); font-size: 0.8rem; margin: 4px 0 10px; }
+.ws-pop-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; font-size: 0.78rem; color: var(--text-muted); flex-wrap: wrap; }
+.ws-pop-foot label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.ws-pop-foot button { background: none; border: none; color: var(--text-secondary); font-weight: 600; cursor: pointer; text-decoration: underline; }
+
+@media (max-width: 900px) {
+    .ws-grid { grid-template-columns: 1fr; }
+    .ws-toolbar .btn span { display: none; }
+    .ws-toolbar .btn { padding: 10px 13px; }
+    .ws-toolbar #wsOcr span, .ws-toolbar #wsCrop span { display: inline; }
+}

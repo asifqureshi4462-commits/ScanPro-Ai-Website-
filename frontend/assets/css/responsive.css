@@ -1,0 +1,129 @@
+/* ==========================================================================
+   ScanPro AI - Responsive Breakpoints (Desktop, Tablet & Mobile)
+   ========================================================================== */
+
+@media (min-width: 1025px) {
+    .mobile-header-controls,
+    .mobile-toggle,
+    .mobile-drawer,
+    .mobile-overlay {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --section-py: 64px;
+    }
+
+    .desktop-nav {
+        display: none;
+    }
+
+    .nav-actions {
+        display: none;
+    }
+
+    .mobile-header-controls {
+        display: flex;
+    }
+
+    .mobile-toggle {
+        display: inline-flex;
+    }
+
+    .hero-grid,
+    .split-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-py: 52px;
+        --header-height: 68px;
+    }
+
+    .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .hero {
+        padding: 40px 0 50px;
+    }
+
+    .page-hero {
+        padding: 44px 0 36px;
+    }
+
+    .hero-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .auth-card {
+        padding: 24px 18px;
+    }
+
+    .dashboard-panel {
+        padding: 20px 16px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        white-space: normal;
+        text-align: center;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .form-row-between {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

@@ -1,0 +1,85 @@
+/* ==========================================================================
+   ScanPro AI - Design System Variables
+   Derived strictly from ScanPro AI Dark Cyber theme tokens & visual assets
+   ========================================================================== */
+
+:root {
+    /* Primary & Surface Backgrounds */
+    --bg-primary: #0F172A;
+    --bg-deep: #061B32;
+    --bg-darker: #060B12;
+    --bg-footer: #04070D;
+    --bg-surface: #1E293B;
+    --bg-tool: #0F1E2A;
+    --bg-tool-alt: #0D1724;
+    --bg-elevated: #334155;
+    --bg-input: #0D1724;
+
+    /* Brand & Cyber Accents */
+    --accent-cyan: #22D3EE;
+    --accent-cyan-bright: #00D4E8;
+    --accent-cyan-dark: #0891B2;
+    --accent-teal: #16C7B5;
+    --accent-teal-light: #2DD4BF;
+    --accent-teal-dark: #0D9488;
+    --accent-purple: #A855F7;
+    --accent-pink: #EC4899;
+    --accent-amber: #F59E0B;
+    --accent-blue: #2563EB;
+
+    /* Semantic Status Colors */
+    --color-success: #10B981;
+    --color-warning: #F59E0B;
+    --color-error: #EF4444;
+    --color-info: #3B82F6;
+
+    /* Text Colors */
+    --text-primary: #F8FAFC;
+    --text-white: #FFFFFF;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+    --text-on-cyan: #061B32;
+
+    /* Glassmorphism & Borders */
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-bg-hover: rgba(255, 255, 255, 0.08);
+    --glass-header: rgba(15, 23, 42, 0.86);
+    --glass-border: rgba(255, 255, 255, 0.10);
+    --glass-border-cyan: rgba(34, 211, 238, 0.28);
+    --glass-border-teal: rgba(22, 199, 181, 0.35);
+
+    /* Gradients */
+    --gradient-hero: radial-gradient(circle at top right, rgba(34, 211, 238, 0.14), transparent 45%),
+                     radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.12), transparent 50%),
+                     linear-gradient(180deg, #061B32 0%, #0F172A 100%);
+    --gradient-cyan: linear-gradient(135deg, #00D4E8 0%, #16C7B5 100%);
+    --gradient-ai: linear-gradient(135deg, #22D3EE 0%, #A855F7 100%);
+    --gradient-pro: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+
+    /* Shadows & Glows */
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+    --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.35);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.50);
+    --glow-cyan: 0 0 24px rgba(34, 211, 238, 0.28);
+    --glow-cyan-strong: 0 8px 28px rgba(0, 212, 232, 0.36);
+
+    /* Typography */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    /* Layout & Spacing */
+    --container-max: 1200px;
+    --header-height: 76px;
+    --section-py: 80px;
+
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-pill: 9999px;
+
+    /* Transitions */
+    --transition-fast: 0.18s ease;
+    --transition-normal: 0.28s ease;
+}
