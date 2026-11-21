@@ -16,11 +16,13 @@ if (isLocalhostRequest()) {
     define('DB_USER', 'root');
     define('DB_PASS', '');
 } else {
-    define('DB_HOST', 'sql311.infinityfree.com');
-    define('DB_PORT', '3306');
-    define('DB_NAME', 'if0_43443649_scanproai');
-    define('DB_USER', 'if0_43443649');
-    define('DB_PASS', 'CK98NCiExG1');
+    // Production credentials must be supplied by the hosting environment.
+    // Never commit database passwords to a public repository.
+    define('DB_HOST', getenv('SCANPRO_DB_HOST') ?: '127.0.0.1');
+    define('DB_PORT', getenv('SCANPRO_DB_PORT') ?: '3306');
+    define('DB_NAME', getenv('SCANPRO_DB_NAME') ?: 'scanpro_ai');
+    define('DB_USER', getenv('SCANPRO_DB_USER') ?: 'root');
+    define('DB_PASS', getenv('SCANPRO_DB_PASS') ?: '');
 }
 
 define('DB_CHARSET', 'utf8mb4');

@@ -1,10 +1,13 @@
 <?php
 declare(strict_types=1);
 
+ob_start();
+
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../helpers/security.php';
 require_once __DIR__ . '/../helpers/validator.php';
 require_once __DIR__ . '/../helpers/response.php';
+require_once __DIR__ . '/../helpers/site_runtime.php';
 
 startSecureSession();
 applySecurityHeaders();
@@ -78,10 +81,19 @@ try {
         'user_agent' => $userAgent !== '' ? $userAgent : null,
     ]);
 
-    // Email the message to the site owner (failure here must not break the form)
     try {
-        $host = preg_replace('/^www\./i', '', preg_replace('/:\d+$/', '', (string) ($_SERVER['HTTP_HOST'] ?? 'localhost')));
-        $oneLine = static fn (string $v): string => trim(preg_replace('/[\r\n]+/', ' ', $v));
+        $receiverEmail = normalizeEmail(getSiteSetting('contact_receiver_email', CONTACT_RECEIVER_EMAIL));
+        if (!isValidEmailAddress($receiverEmail)) {
+            $receiverEmail = CONTACT_RECEIVER_EMAIL;
+        }
+
+        $rawHost = preg_replace('/^www\./i', '', preg_replace('/:\d+$/', '', (string) ($_SERVER['HTTP_HOST'] ?? '')));
+        $cleanHost = preg_replace('/[^a-zA-Z0-9.\-]/', '', (string) $rawHost);
+        if ($cleanHost === '' || !str_contains($cleanHost, '.') || filter_var($cleanHost, FILTER_VALIDATE_IP)) {
+            $cleanHost = 'scanproai.great-site.net';
+        }
+
+        $oneLine = static fn (string $v): string => trim((string) preg_replace('/[\r\n]+/', ' ', $v));
         $mailSubject = '=?UTF-8?B?' . base64_encode('[ScanPro AI Contact] ' . $oneLine($subject)) . '?=';
         $mailBody = "New message from the ScanPro AI contact form\n\n"
             . 'Name: ' . $oneLine($name) . "\n"
@@ -90,12 +102,12 @@ try {
             . 'IP: ' . $ipAddress . "\n\n"
             . "Message:\n" . $message . "\n";
         $mailHeaders = [
-            'From: ScanPro AI <noreply@' . $host . '>',
+            'From: ScanPro AI <noreply@' . $cleanHost . '>',
             'Reply-To: ' . $oneLine($email),
             'MIME-Version: 1.0',
             'Content-Type: text/plain; charset=UTF-8',
         ];
-        if (!@mail(CONTACT_RECEIVER_EMAIL, $mailSubject, $mailBody, implode("\r\n", $mailHeaders))) {
+        if (!@mail($receiverEmail, $mailSubject, $mailBody, implode("\r\n", $mailHeaders))) {
             error_log('[ScanPro API Contact] mail() failed; message is saved in the database only.');
         }
     } catch (Throwable $mailError) {

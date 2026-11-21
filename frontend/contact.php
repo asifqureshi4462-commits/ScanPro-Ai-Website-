@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../backend/config/app.php';
 require_once __DIR__ . '/../backend/helpers/security.php';
+require_once __DIR__ . '/../backend/helpers/site_runtime.php';
 
 $pageTitle = 'Contact';
 $pageDescription = 'Contact the ScanPro AI team for product questions, Android app early access, or technical support.';
@@ -19,6 +20,8 @@ $prefillSubject = isset($_GET['subject']) && is_string($_GET['subject'])
 
 require_once __DIR__ . '/includes/head.php';
 require_once __DIR__ . '/includes/header.php';
+
+$supportEmail = getSiteSetting('contact_email', APP_SUPPORT_EMAIL);
 ?>
 
 <main>
@@ -38,7 +41,6 @@ require_once __DIR__ . '/includes/header.php';
 
     <section class="section">
         <div class="container split-grid" style="align-items:start;">
-            <!-- Support Information Column -->
             <div style="display:flex;flex-direction:column;gap:18px;">
                 <article class="card card--tool">
                     <div class="card-icon card-icon--cyan">
@@ -46,8 +48,8 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
                     <h3>Direct Support Email</h3>
                     <p>Reach our support inbox for account assistance or technical inquiries.</p>
-                    <a href="mailto:<?= e(APP_SUPPORT_EMAIL) ?>" class="card-link">
-                        <span><?= e(APP_SUPPORT_EMAIL) ?></span>
+                    <a href="mailto:<?= e($supportEmail) ?>" class="card-link">
+                        <span><?= e($supportEmail) ?></span>
                         <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </article>
@@ -73,7 +75,6 @@ require_once __DIR__ . '/includes/header.php';
                 </article>
             </div>
 
-            <!-- Contact Form Card -->
             <div class="card" style="padding:30px;">
                 <h2>Send a Message</h2>
                 <p class="text-muted mt-1 mb-3" style="font-size:0.92rem;">

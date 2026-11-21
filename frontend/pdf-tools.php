@@ -1,13 +1,24 @@
 <?php
 require_once __DIR__ . '/../backend/config/app.php';
 require_once __DIR__ . '/../backend/helpers/security.php';
+require_once __DIR__ . '/../backend/helpers/site_runtime.php';
 
-$pageTitle = 'PDF Tools';
-$pageDescription = 'Use 10 working, private, browser-based ScanPro AI PDF tools: Merge, Split, Compress, PDF to JPG, JPG to PDF, Rotate, Watermark, Page Numbers, Extract, and Reorder Pages.';
+$pageTitle = 'PDF & File Tools';
+$pageDescription = 'Use working, private, browser-based ScanPro AI tools: Files to ZIP/7Z, Merge, Split, Compress, PDF to JPG, JPG to PDF, Rotate, Watermark, Page Numbers, Extract, Reorder, Sign, Redact & more.';
 $activePage = 'pdf-tools';
 $extraStyles = ['assets/css/pdf-tools.css'];
 
 $toolsCatalog = [
+    [
+        'slug'  => 'files-to-zip',
+        'name'  => 'Files to ZIP / 7Z',
+        'desc'  => 'Compress any files or folders into ZIP, 7Z, TAR.GZ, TAR.XZ, or TAR archives with password & compression level options.',
+        'icon'  => 'fa-file-zipper',
+        'tone'  => 'cyan',
+        'badge' => 'Archive',
+        'href'  => 'tools/files-to-zip.php',
+        'keys'  => 'zip 7z tar gz xz bz2 compress archive password folder files',
+    ],
     [
         'slug'  => 'merge-pdf',
         'name'  => 'Merge PDF',
@@ -200,6 +211,17 @@ $toolsCatalog = [
     ],
 ];
 
+// Filter and annotate tools dynamically from Admin Feature Control Center
+$visibleTools = [];
+foreach ($toolsCatalog as $tool) {
+    $avail = getWebToolAvailability($tool['slug']);
+    if (!$avail['enabled'] && $avail['status'] !== 'maintenance') {
+        continue; // Hidden when disabled or restricted to Android only
+    }
+    $tool['_availability'] = $avail;
+    $visibleTools[] = $tool;
+}
+
 require_once __DIR__ . '/includes/head.php';
 require_once __DIR__ . '/includes/header.php';
 ?>
@@ -213,11 +235,11 @@ require_once __DIR__ . '/includes/header.php';
         <div class="container">
             <span class="eyebrow">
                 <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-                <span>PRIVATE CLIENT-SIDE PDF WORKSPACE</span>
+                <span>PRIVATE CLIENT-SIDE PDF &amp; ARCHIVE WORKSPACE</span>
             </span>
-            <h1>All <?= count($toolsCatalog) ?> <span class="text-gradient">PDF Tools</span> Ready in Your Browser</h1>
+            <h1>All <?= count($visibleTools) ?> <span class="text-gradient">PDF &amp; Archive Tools</span> Ready in Your Browser</h1>
             <p>
-                Every tool below runs locally in your browser using PDF-lib, PDF.js, and HTML5 Canvas—your files stay private on your device.
+                Every tool below runs locally in your browser—your files stay private on your device and never upload to our server.
             </p>
         </div>
     </section>
@@ -230,14 +252,18 @@ require_once __DIR__ . '/includes/header.php';
                         type="search"
                         id="pdfToolsFilterInput"
                         class="form-control"
-                        placeholder="Filter tools (e.g. merge, split, compress, jpg, rotate, watermark)..."
-                        aria-label="Filter PDF tools"
+                        placeholder="Filter tools (e.g. zip, 7z, merge, split, compress, word, sign, redact)..."
+                        aria-label="Filter PDF and archive tools"
                     >
                 </div>
             </div>
 
             <div class="pdf-hub-grid" id="pdfToolsHubGrid">
-                <?php foreach ($toolsCatalog as $tool): ?>
+                <?php foreach ($visibleTools as $tool): ?>
+                    <?php
+                    $avail = $tool['_availability'];
+                    $isMaint = ($avail['status'] === 'maintenance');
+                    ?>
                     <article
                         class="pdf-hub-card"
                         data-tool-search="<?= e(strtolower($tool['name'] . ' ' . $tool['desc'] . ' ' . $tool['keys'])) ?>"
@@ -246,20 +272,31 @@ require_once __DIR__ . '/includes/header.php';
                             <div class="card-icon card-icon--<?= e($tool['tone']) ?>">
                                 <i class="fa-solid <?= e($tool['icon']) ?>" aria-hidden="true"></i>
                             </div>
-                            <span class="card-badge card-badge--cyan"><?= e($tool['badge']) ?></span>
+                            <?php if ($isMaint): ?>
+                                <span class="card-badge card-badge--pro">Maintenance</span>
+                            <?php else: ?>
+                                <span class="card-badge card-badge--cyan"><?= e($tool['badge']) ?></span>
+                            <?php endif; ?>
                         </div>
                         <h3><?= e($tool['name']) ?></h3>
-                        <p><?= e($tool['desc']) ?></p>
-                        <a href="<?= e($tool['href']) ?>" class="btn btn-primary btn-block">
-                            <span>Open Tool</span>
-                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-                        </a>
+                        <p><?= e($isMaint ? $avail['message'] : $tool['desc']) ?></p>
+                        <?php if ($isMaint): ?>
+                            <button type="button" class="btn btn-secondary btn-block" disabled>
+                                <i class="fa-solid fa-wrench" aria-hidden="true"></i>
+                                <span>Under Maintenance</span>
+                            </button>
+                        <?php else: ?>
+                            <a href="<?= e($tool['href']) ?>" class="btn btn-primary btn-block">
+                                <span>Open Tool</span>
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        <?php endif; ?>
                     </article>
                 <?php endforeach; ?>
             </div>
 
             <p id="pdfToolsEmptyFilter" class="text-center text-muted mt-4" style="display:none;">
-                No PDF tools matched your search query.
+                No tools matched your search query.
             </p>
         </div>
     </section>

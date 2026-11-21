@@ -1,7 +1,12 @@
 <?php
 require_once __DIR__ . '/../../backend/helpers/security.php';
+require_once __DIR__ . '/../../backend/helpers/site_runtime.php';
 
 $prefix = isset($routePrefix) && is_string($routePrefix) ? $routePrefix : '';
+$footerSiteName = getSiteSetting('site_name', APP_NAME);
+$footerSupportEmail = getSiteSetting('contact_email', APP_SUPPORT_EMAIL);
+$trackEndpoint = getProjectBasePath() . '/backend/api/track.php';
+$pageTrackKey = isset($activePage) && is_string($activePage) && $activePage !== '' ? $activePage : 'page';
 ?>
 <footer class="site-footer">
     <div class="container">
@@ -9,7 +14,7 @@ $prefix = isset($routePrefix) && is_string($routePrefix) ? $routePrefix : '';
             <div class="footer-brand">
                 <a href="<?= e($prefix) ?>index.php" class="brand-logo">
                     <div class="brand-mark">
-                        <img src="<?= e($prefix) ?>assets/images/scanpro-logo.png" alt="<?= e(APP_NAME) ?> Logo">
+                        <img src="<?= e($prefix) ?>assets/images/scanpro-logo.png" alt="<?= e($footerSiteName) ?> Logo">
                     </div>
                     <div class="brand-text">
                         <span class="brand-name">ScanPro <span>AI</span></span>
@@ -59,8 +64,8 @@ $prefix = isset($routePrefix) && is_string($routePrefix) ? $routePrefix : '';
         </div>
 
         <div class="footer-bottom">
-            <span>&copy; <?= date('Y') ?> <?= e(APP_NAME) ?>. All rights reserved.</span>
-            <span>Support: <a href="mailto:<?= e(APP_SUPPORT_EMAIL) ?>" class="form-link"><?= e(APP_SUPPORT_EMAIL) ?></a></span>
+            <span>&copy; <?= date('Y') ?> <?= e($footerSiteName) ?>. All rights reserved.</span>
+            <span>Support: <a href="mailto:<?= e($footerSupportEmail) ?>" class="form-link"><?= e($footerSupportEmail) ?></a></span>
         </div>
     </div>
 </footer>
@@ -82,5 +87,45 @@ if (!empty($extraScripts) && is_array($extraScripts)) {
     }
 }
 ?>
+<script>
+(function () {
+    var endpoint = <?= json_encode($trackEndpoint, JSON_UNESCAPED_SLASHES) ?>;
+    var pageKey = <?= json_encode($pageTrackKey, JSON_UNESCAPED_SLASHES) ?>;
+    var path = window.location.pathname || '';
+    var toolMatch = path.match(/\/frontend\/tools\/([a-z0-9\-]+)\.php$/i);
+    var targetKey = toolMatch ? ('tool:' + toolMatch[1].toLowerCase()) : pageKey;
+
+    function sendEvent(eventType, key) {
+        try {
+            var body = JSON.stringify({ event_type: eventType, target_key: key, platform: 'website' });
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon(endpoint, new Blob([body], { type: 'application/json' }));
+            } else if (window.fetch) {
+                fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
+            }
+        } catch (e) {}
+    }
+
+    sendEvent('page_view', targetKey);
+
+    document.addEventListener('click', function (e) {
+        var el = e.target && e.target.closest ? e.target.closest('button, a') : null;
+        if (!el) return;
+        var id = el.id || '';
+        if (toolMatch) {
+            if (/ExecuteBtn$|^stRun$|^zipExecuteBtn$/.test(id)) {
+                sendEvent('tool_run', toolMatch[1].toLowerCase());
+            } else if (/Download.*Btn$|^stDownload$|^zipDownloadBtn$/.test(id)) {
+                sendEvent('download', toolMatch[1].toLowerCase());
+            }
+        } else if (id === 'wsDownload') {
+            sendEvent('tool_run', 'workspace');
+            sendEvent('download', 'workspace');
+        } else if (el.tagName === 'A' && el.hasAttribute('download') && (el.getAttribute('href') || '').indexOf('.apk') !== -1) {
+            sendEvent('download', 'android-apk');
+        }
+    }, { passive: true });
+})();
+</script>
 </body>
 </html>

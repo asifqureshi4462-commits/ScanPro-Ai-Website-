@@ -49,7 +49,7 @@ function isLocalhostRequest(): bool
 }
 
 /**
- * Determine whether the current request is served over HTTPS (including reverse proxies / InfinityFree).
+ * Determine whether the current request is actually served over HTTPS.
  */
 function isHttpsRequest(): bool
 {
@@ -72,8 +72,8 @@ function isHttpsRequest(): bool
         return true;
     }
 
-    $rawHost = strtolower((string) preg_replace('/:\d+$/', '', (string) ($_SERVER['HTTP_HOST'] ?? '')));
-    if ($rawHost === 'scanproai.great-site.net') {
+    $origin = strtolower((string) ($_SERVER['HTTP_ORIGIN'] ?? ''));
+    if (str_starts_with($origin, 'https://')) {
         return true;
     }
 

@@ -2,19 +2,29 @@
 require_once __DIR__ . '/../../backend/config/app.php';
 require_once __DIR__ . '/../../backend/config/session.php';
 require_once __DIR__ . '/../../backend/helpers/security.php';
+require_once __DIR__ . '/../../backend/auth/auth_guard.php';
+require_once __DIR__ . '/site_guard.php';
 
 startSecureSession();
+restoreSessionFromRememberCookie();
 applySecurityHeaders();
 
 $prefix = isset($routePrefix) && is_string($routePrefix) ? $routePrefix : '';
+$currentPageKey = isset($activePage) && is_string($activePage) ? $activePage : '';
+
+// Enforce Admin-configured Maintenance Mode & page visibility before sending HTML
+enforceWebsiteRuntimeGuard($currentPageKey, $prefix);
+
+$runtimeSiteName = getSiteSetting('site_name', APP_NAME);
+$runtimeSiteDesc = getSiteSetting('site_description', APP_TAGLINE);
 
 $resolvedTitle = isset($pageTitle) && is_string($pageTitle) && $pageTitle !== ''
-    ? $pageTitle . ' | ' . APP_NAME
-    : APP_NAME . ' – AI Document Scanner & PDF Suite';
+    ? $pageTitle . ' | ' . $runtimeSiteName
+    : $runtimeSiteName . ' – AI Document Scanner & PDF Suite';
 
 $resolvedDescription = isset($pageDescription) && is_string($pageDescription) && $pageDescription !== ''
     ? $pageDescription
-    : APP_TAGLINE;
+    : $runtimeSiteDesc;
 
 $csrfToken = getCsrfToken();
 
@@ -82,3 +92,4 @@ if ($rawHost !== '') {
     ?>
 </head>
 <body>
+<?php renderSiteTopNotices($currentPageKey); ?>

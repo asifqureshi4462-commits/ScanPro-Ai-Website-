@@ -31,11 +31,11 @@ $homeTopTools = [
         'href'  => 'tools/compress-pdf.php',
     ],
     [
-        'title' => 'PDF to JPG',
-        'desc'  => 'Preview PDF pages, pick the pages you need, adjust quality, and export JPGs or ZIP.',
-        'icon'  => 'fa-file-image',
+        'title' => 'Files to ZIP / 7Z',
+        'desc'  => 'Pack files or folders into ZIP, 7Z, or TAR.GZ archives with custom compression & password.',
+        'icon'  => 'fa-file-zipper',
         'tone'  => 'purple',
-        'href'  => 'tools/pdf-to-jpg.php',
+        'href'  => 'pdf-tools.php#pdf-management',
     ],
     [
         'title' => 'JPG to PDF',
@@ -154,8 +154,8 @@ $isLoggedIn = !empty($_SESSION['user_id']);
 
                 <div class="hero-stats">
                     <div class="hero-stat">
-                        <strong>10 Tools</strong>
-                        <span>Browser PDF Studio</span>
+                        <strong>20 Tools</strong>
+                        <span>Browser PDF &amp; Archive Studio</span>
                     </div>
                     <div class="hero-stat">
                         <strong>50+ Languages</strong>
@@ -178,7 +178,7 @@ $isLoggedIn = !empty($_SESSION['user_id']);
     <section class="section" id="features-overview">
         <div class="container">
             <div class="section-header">
-                <span class="eyebrow">TOP PDF TOOLS</span>
+                <span class="eyebrow">TOP PDF &amp; ARCHIVE TOOLS</span>
                 <h2>Start With Our <span class="text-gradient">Most Popular Tools</span></h2>
                 <p class="section-subtitle">
                     Tap any tool below to open its full-screen browser workspace immediately, or shift to the full Tools hub.
@@ -205,7 +205,7 @@ $isLoggedIn = !empty($_SESSION['user_id']);
                         <i class="fa-solid fa-table-cells" aria-hidden="true"></i>
                     </div>
                     <h3>All Tools &amp; Features</h3>
-                    <p>View all 10 working PDF tools (Rotate, Watermark, Page Numbers, Extract, Reorder &amp; more) on the Tools page.</p>
+                    <p>View all 20 working tools (Sign, Redact, PDF to Word, Rotate, Watermark, Page Numbers, ZIP/7Z &amp; more) on the Tools page.</p>
                     <a href="pdf-tools.php" class="card-link">
                         <span>Explore All Tools</span>
                         <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
@@ -215,7 +215,7 @@ $isLoggedIn = !empty($_SESSION['user_id']);
 
             <div class="text-center mt-4" style="display:flex;justify-content:center;flex-wrap:wrap;gap:12px;">
                 <a href="pdf-tools.php" class="btn btn-primary btn-lg">
-                    <span>View All PDF Tools</span>
+                    <span>View All 20 Tools</span>
                     <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
                 </a>
                 <a href="features.php" class="btn btn-secondary btn-lg">
@@ -406,7 +406,7 @@ $isLoggedIn = !empty($_SESSION['user_id']);
                         <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                     </button>
                     <div class="faq-answer">
-                        Browser PDF tools execute locally inside your browser without uploading files to our PHP server, and mobile scanning/filters execute on-device. Your web account uses hashed passwords and strict session controls.
+                        Browser PDF and archive tools execute locally inside your browser without uploading files to our PHP server, and mobile scanning/filters execute on-device. Your web account uses hashed passwords and strict session controls.
                     </div>
                 </div>
 
@@ -426,7 +426,7 @@ $isLoggedIn = !empty($_SESSION['user_id']);
                         <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
                     </button>
                     <div class="faq-answer">
-                        ScanPro AI supports PDF, JPG, PNG, Word (.docx/.txt), Excel (.xlsx/.csv), PowerPoint (.pptx), HTML/JSON/XML code files, EPUB eBooks, and ZIP archives.
+                        ScanPro AI supports PDF, JPG, PNG, Word (.docx/.txt), Excel (.xlsx/.csv), PowerPoint (.pptx), HTML/JSON/XML code files, EPUB eBooks, and ZIP/7Z/TAR archives.
                     </div>
                 </div>
 
